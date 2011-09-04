@@ -1,0 +1,67 @@
+--- a/Makefile.am   2011-08-29 17:02:43.349305599 -0400
++++ b/Makefile.am   2011-08-29 17:02:47.941328374 -0400
+@@ -192,6 +192,10 @@
+ SUBDIRS += plugins/omprog
+ endif
+
++if ENABLE_OMSOLR
++SUBDIRS += plugins/omsolr
++endif
++
+ if ENABLE_RFC3195
+ SUBDIRS += plugins/im3195
+ endif
+@@ -231,6 +235,7 @@
+                                --enable-pmlastmsg \
+                                --enable-omruleset \
+                                --enable-omprog \
++                               --enable-omsolr\
+                                --enable-imdiag \
+                                --enable-imptcp \
+                                --enable-omuxsock \
+--- a/configure.ac  2011-08-29 17:07:42.710790064 -0400
++++ b/configure.ac  2011-08-29 17:07:50.326827833 -0400
+@@ -845,7 +845,6 @@
+ )
+ AM_CONDITIONAL(ENABLE_IMFILE, test x$enable_imfile = xyes)
+
+-
+ # settings for the door input module (under solaris, thus default off)
+ AC_ARG_ENABLE(imsolaris,
+         [AS_HELP_STRING([--enable-imsolaris],[solaris input module enabled @<:@default=no@:>@])],
+@@ -896,6 +895,19 @@
+ )
+ AM_CONDITIONAL(ENABLE_OMPROG, test x$enable_omprog = xyes)
+
++# settings for the Solr ouput module
++AC_ARG_ENABLE(omsolr,
++        [AS_HELP_STRING([--enable-omsolr],[solr outpu tmodule enabled @<:@default=no@:>@])],
++        [case "${enableval}" in
++         yes) enable_omsolr="yes" ;;
++          no) enable_omsolr="no" ;;
++           *) AC_MSG_ERROR(bad value ${enableval} for --enable-omsolr) ;;
++         esac],
++        [enable_omsolr=no]
++)
++AM_CONDITIONAL(ENABLE_OMSOLR, test x$enable_omsolr = xyes)
++
++
+
+ # settings for omudpspoof
+ AC_ARG_ENABLE(omudpspoof,
+@@ -1180,6 +1192,7 @@
+                plugins/omtemplate/Makefile \
+                plugins/omhdfs/Makefile \
+                plugins/omprog/Makefile \
++        plugins/omsolr/Makefile \
+                plugins/omstdout/Makefile \
+                plugins/pmrfc3164sd/Makefile \
+                plugins/pmlastmsg/Makefile \
+@@ -1243,6 +1256,7 @@
+ echo "    omdbalerting module will be compiled:     $enable_omdbalerting"
+ echo "    omudpspoof module will be compiled:       $enable_omudpspoof"
+ echo "    omuxsock module will be compiled:         $enable_omuxsock"
++echo "    omsolr module will be compiled:           $enable_omsolr"
+ echo "    output template module will be compiled:  $enable_omtemplate"
+ echo
+ echo "---{ parser modules }---"
