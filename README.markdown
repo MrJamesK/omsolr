@@ -46,12 +46,12 @@ Add the following lines to rsyslog.conf
     
 Define a valid Solr template, using XML, for communicating the data to your Solr schema.  Here is an example:
 
->    $template SolrLog, "<add><doc><field name='hostname'>%FROMHOST%</field>
->    <field name='facility'>%syslogfacility-text%</field><field name='msg'><![CDATA[%msg%]]></field>
->    <field name='hostname'>%FROMHOST%</field><field name='priority'>%syslogpriority%</field>
->    <field name='tag'>%syslogtag%</field><field name='program'>%programname%</field>
->    <field name='severity'>%syslogseverity-text%</field>
->    <field name='generated'>%timegenerated:::date-rfc3339%</field></doc></add>"
+    $template SolrLog, "<add><doc><field name='hostname'>%FROMHOST%</field>
+    <field name='facility'>%syslogfacility-text%</field><field name='msg'><![CDATA[%msg%]]></field>
+    <field name='hostname'>%FROMHOST%</field><field name='priority'>%syslogpriority%</field>
+    <field name='tag'>%syslogtag%</field><field name='program'>%programname%</field>
+    <field name='severity'>%syslogseverity-text%</field>
+    <field name='generated'>%timegenerated:::date-rfc3339%</field></doc></add>"
 
 Please note that the template must include the <add> and <doc> fields.  These are NOT automatically 
 added.  This provides additional flexibility so you can set arguments to the "add" specification.
