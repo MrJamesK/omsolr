@@ -42,6 +42,7 @@ Configuring omsolr
 Add the following lines to rsyslog.conf
 
 >    $ModLoad omsolr
+
 >    $actionsolrurl <yoursolrhost:port>/solr/<corename>/update/
     
 Define a valid Solr template, using XML, for communicating the data to your Solr schema.  Here is an example:
