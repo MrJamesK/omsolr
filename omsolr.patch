@@ -11,6 +11,7 @@
  if ENABLE_RFC3195
  SUBDIRS += plugins/im3195
  endif
+
 @@ -231,6 +235,7 @@
                                 --enable-pmlastmsg \
                                 --enable-omruleset \
@@ -29,6 +30,7 @@
  # settings for the door input module (under solaris, thus default off)
  AC_ARG_ENABLE(imsolaris,
          [AS_HELP_STRING([--enable-imsolaris],[solaris input module enabled @<:@default=no@:>@])],
+
 @@ -896,6 +895,19 @@
  )
  AM_CONDITIONAL(ENABLE_OMPROG, test x$enable_omprog = xyes)
